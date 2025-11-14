@@ -12,9 +12,9 @@ botonAgregar.addEventListener('click', () => {
     nuevaFila.innerHTML = 
     `
         <div>${contadorFila}</div>
-        <input type="text">
-        <input type="text">
-        <div><input type="checkbox"></div>
+        <input type="text" class="desc-fila">
+        <input type="text" class="nota-fila">
+        <input type="checkbox" class="check-lista">
         <div>
             <img width="24" height="24" src="https://img.icons8.com/material/24/FA5252/trash--v1.png" class="icono-basurero" alt="trash--v1"/>
         </div> 
@@ -42,4 +42,5 @@ function renumerarFilas() {
         fila.children[0].textContent = index+1;
     });
     contadorFila = filass.length + 1;
+
 };
