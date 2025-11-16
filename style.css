@@ -83,10 +83,14 @@ input.nota-fila {
     align-items: center;
     left: 50%;
     transform: translateX(-50%);
-    top: 70%vh;
+    top: 70%;
     position: fixed;
     z-index: 400;
     transition: opacity 0.3s ease-in-out;
 }
 
+.contenedor-filas-t {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
 
