@@ -70,8 +70,6 @@ input.nota-fila {
     accent-color: rebeccapurple;
 }
 
-/* Diseño mensaje para cuando se marque el checkbox */
-
 .cMensajeCheck {
     background-color: #34df5c;
     padding: 6px;
@@ -93,4 +91,3 @@ input.nota-fila {
     text-decoration: line-through;
     opacity: 0.5;
 }
-
