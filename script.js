@@ -1,27 +1,4 @@
 
-function guardarEnLocal() {
-    const filas = [];
-    const filass = contenedor.querySelectorAll('.fila');
-
-    filass.forEach(fila => {
-        filas.push({
-            numero: fila.children[0].textContent,
-            descripcion: fila.querySelector('.desc-fila').value,
-            nota: fila.querySelector('.nota-fila').value,
-            completado: fila.querySelector('.check-lista').checked
-        });
-    });
-
-    localStorage.setItem('tareas', JSON.stringify(filas));  
-}
-
-function cargarDesdeLocal() {
-    const data = JSON.parse(localStorage.getItem('tareas')) || [];
-    data.forEach(item => {
-        crearFilaDesdeDatos(item);
-    });
-} 
-
 const botonAgregar = document.getElementById('idAgregarTarea');
 const contenedor = document.getElementById('contenedor-filas');
 
@@ -41,6 +18,7 @@ botonAgregar.addEventListener('click', () => {
 });
 
 function crearFila(item) {
+
     const nuevaFila = document.createElement('div');
     nuevaFila.classList.add('fila');
 
@@ -53,6 +31,15 @@ function crearFila(item) {
             <img width="24" height="24" src="https://img.icons8.com/material/24/FA5252/trash--v1.png" class="icono-basurero" alt="trash--v1"/>
         </div>
     `;
+
+    const inputDescripcion = nuevaFila.querySelector('.desc-fila');
+    const inputNota = nuevaFila.querySelector('.nota-fila');
+
+    [inputDescripcion, inputNota].forEach(input => {
+        input.addEventListener('input', () => {
+            guardarEnLocal();
+        });
+    });
 
     const checkbox = nuevaFila.querySelector('.check-lista');
     const mensajeeCheck = document.getElementById('mensajeCheck');
@@ -81,7 +68,6 @@ function crearFila(item) {
     contenedor.style.display = 'grid';
 }
 
-// Guardar en localStorage
 function guardarEnLocal() {
     const filas = [];
     const filass = contenedor.querySelectorAll('.fila');
@@ -96,7 +82,6 @@ function guardarEnLocal() {
     localStorage.setItem('tareas', JSON.stringify(filas));
 }
 
-// Cargar desde localStorage
 function cargarDesdeLocal() {
     const data = JSON.parse(localStorage.getItem('tareas')) || [];
     data.forEach(item => {
@@ -105,7 +90,6 @@ function cargarDesdeLocal() {
     });
 }
 
-// Renumerar filas
 function renumerarFilas() {
     const filass = contenedor.querySelectorAll('.fila');
     filass.forEach((fila,index) => fila.children[0].textContent = index+1);
