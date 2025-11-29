@@ -126,3 +126,14 @@ input.nota-fila {
     display: none;
 }
 
+.estilo-volverGrupos {
+    width: 45px;
+    height: 43px;
+    cursor: pointer;
+    transition: transform .2s ease;
+    margin-left: 40px;
+}
+
+.estilo-volverGrupos:hover {
+    transform: scale(1.2);
+}

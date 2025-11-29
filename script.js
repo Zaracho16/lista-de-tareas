@@ -2,10 +2,9 @@
 const botonAgregar = document.getElementById('idAgregarTarea');
 const contenedor = document.getElementById('contenedor-filas');
 
-/* Generar los grupos dinamicamente */
-
 let grupos = ["universidad", "trabajo", "personal"];
 let grupoActual = null;
+
 
 const gruposContenedor = document.getElementById('gruposContenedor');
 const seccionTareas = document.getElementById('seccionTareas');
@@ -26,17 +25,16 @@ function seleccionarGrupo(grupo) {
     grupoActual = grupo;
     
     const tituloGrupoActual = document.getElementById("tituloGrupoTareas");
-     tituloGrupoActual.textContent = `${grupo.charAt(0).toUpperCase() + grupo.slice(1)} Lista`;
+    tituloGrupoActual.textContent = `${grupo.charAt(0).toUpperCase() + grupo.slice(1)} - Lista`;
 
     gruposContenedor.style.display = "none";
     seccionTareas.style.display = "block";
+    
+    localStorage.setItem('grupoActual', grupo);
     cargarDesdeLocal();
 }
 
-
 let contadorFila = 1;
-
-cargarDesdeLocal();
 
 botonAgregar.addEventListener('click', () => {
     crearFila({
@@ -115,6 +113,7 @@ function guardarEnLocal() {
 }
 
 function cargarDesdeLocal() {
+    if(!grupoActual) return;
     contenedor.innerHTML = "";
     contadorFila = 1;
     const data = JSON.parse(localStorage.getItem(`tareas_${grupoActual}`)) || [];
@@ -127,4 +126,19 @@ function renumerarFilas() {
     contadorFila = filass.length + 1;
 }
 
+const iconoBack = document.getElementById('volverGrupos');
+iconoBack.addEventListener('click', () => {
+    seccionTareas.style.display = 'none';
+    gruposContenedor.style.display = 'flex';
+    localStorage.removeItem('grupoActual');
+    document.getElementById('tituloGrupoTareas').textContent = "Grupo de tareas";
+});
+
 renderizarGrupos();
+const grupoGuardado = localStorage.getItem('grupoActual');
+if (grupoGuardado) {
+    seleccionarGrupo(grupoGuardado);
+} else {
+    seccionTareas.style.display = "none";
+    gruposContenedor.style.display = "flex";
+}
